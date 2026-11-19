@@ -57,4 +57,4 @@ The Oracle schema is not provisioned by this module. The existing application de
 
 ## Important security note
 
-The legacy source currently contains database connection credentials and SQL built through string concatenation. Treat any credentials committed in the old source as compromised and rotate them. This new module does not contain default database credentials. Do not expose the API to untrusted networks until authentication, authorization, and the remaining business endpoints are implemented.
+The legacy source historically contained committed database connection credentials and still has SQL built through string concatenation. The current working tree reads legacy connection settings from environment variables, but credentials remain in Git history: treat them as compromised and rotate them. This new module does not contain default database credentials. Do not expose the API to untrusted networks until authentication, authorization, and the remaining business endpoints are implemented.
