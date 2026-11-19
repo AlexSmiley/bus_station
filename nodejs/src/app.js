@@ -5,6 +5,7 @@ import { rateLimit } from 'express-rate-limit';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import pinoHttp from 'pino-http';
+import { fileURLToPath } from 'node:url';
 import { createSystemRouter } from './routes/system.js';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
@@ -38,6 +39,9 @@ export function createApp({ config, database, logger }) {
     apis: ['./src/routes/*.js']
   });
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpec));
+
+  const publicDirectory = fileURLToPath(new URL('../public/', import.meta.url));
+  app.use(express.static(publicDirectory));
 
   app.use(notFoundHandler);
   app.use((error, request, response, next) => {
