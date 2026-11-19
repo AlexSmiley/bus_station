@@ -18,7 +18,7 @@ See [modernized/README.md](modernized/README.md) for setup and the migration roa
 
 ## Security
 
-Do not use the legacy application with production data until its committed database credentials have been rotated and its SQL statements have been migrated to prepared statements. The modernized module reads database connection settings from environment variables and does not ship with credentials.
+The legacy client now reads its database connection settings from DB_URL, DB_USERNAME, and DB_PASSWORD environment variables. However, the old credentials remain in Git history and must be rotated. The legacy database layer still constructs SQL through string concatenation and must be migrated to prepared statements before production use. The modernized module does not ship with credentials.
 
 ## Current limitations
 
