@@ -3,13 +3,15 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';\nimport pinoHttp from 'pino-http';
+import swaggerUi from 'swagger-ui-express';
+import pinoHttp from 'pino-http';
 import { createSystemRouter } from './routes/system.js';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
 export function createApp({ config, database, logger }) {
   const app = express();
-  app.disable('x-powered-by');\n  app.use(pinoHttp({ logger }));
+  app.disable('x-powered-by');
+  app.use(pinoHttp({ logger }));
   app.use(helmet());
   app.use(cors({
     origin: config.CORS_ORIGIN.split(',').map((origin) => origin.trim()),
