@@ -66,6 +66,6 @@ test('GET / serves the operations dashboard', async () => {
 test('GET /app.js serves the dashboard client', async () => {
   const response = await request(createTestApp()).get('/app.js');
   assert.equal(response.status, 200);
-  assert.match(response.headers['content-type'], /javascript/);
+  assert.ok(response.headers['content-type'].includes('javascript'));
   assert.match(response.text, /refreshStatus/);
 });
