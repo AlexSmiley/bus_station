@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const booleanFromEnv = z.preprocess((value) => {
   if (typeof value === 'boolean') return value;
-  if (typeof value === 'string') return value.toLowerCase() === 'true';
+  if (typeof value === 'string') {\n    if (value.toLowerCase() === 'true') return true;\n    if (value.toLowerCase() === 'false') return false;\n  }
   return false;
 }, z.boolean());
 
