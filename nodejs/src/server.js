@@ -10,11 +10,14 @@ const database = createOracleDatabase(config, logger);
 const app = createApp({ config, database, logger });
 
 let server;
+let shuttingDown = false;
 
 async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
   logger.info({ signal }, 'Shutting down');
-  server?.close();
   try {
+    if (server) await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
     await database.close();
     process.exit(0);
   } catch (error) {
