@@ -6,7 +6,6 @@ export function createLogger(config) {
     redact: {
       paths: ['req.headers.authorization', 'ORACLE_PASSWORD', 'password'],
       censor: '[REDACTED]'
-    },
-    ...(config.NODE_ENV === 'development' ? { transport: { target: 'pino-pretty', options: { colorize: true } } } : {})
+    }
   });
 }
