@@ -2,8 +2,11 @@ import { z } from 'zod';
 
 const booleanFromEnv = z.preprocess((value) => {
   if (typeof value === 'boolean') return value;
-  if (typeof value === 'string') {\n    if (value.toLowerCase() === 'true') return true;\n    if (value.toLowerCase() === 'false') return false;\n  }
-  return false;
+  if (typeof value === 'string') {
+    if (value.toLowerCase() === 'true') return true;
+    if (value.toLowerCase() === 'false') return false;
+  }
+  return value;
 }, z.boolean());
 
 const schema = z.object({
