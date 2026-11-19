@@ -16,7 +16,11 @@ A new Java 21 / Spring Boot REST API is being introduced separately under [`mode
 
 See [modernized/README.md](modernized/README.md) for the Java setup and [nodejs/README.md](nodejs/README.md) for the Node.js setup.
 
-### Node.js API\n\nA parallel Node.js / Express API implementation is available under [`nodejs/`](nodejs/README.md). It provides a separate runtime and port, Oracle pool integration, health endpoints, OpenAPI documentation, and automated tests. Both API tracks are retained for evaluation; neither replaces the Swing client.\n\n## Security
+### Node.js API
+
+A parallel Node.js / Express API implementation is available under [`nodejs/`](nodejs/README.md). It provides a separate runtime and port, Oracle pool integration, health endpoints, OpenAPI documentation, and automated tests. Both API tracks are retained for evaluation; neither replaces the Swing client.
+
+## Security
 
 The legacy client now reads its database connection settings from DB_URL, DB_USERNAME, and DB_PASSWORD environment variables. However, the old credentials remain in Git history and must be rotated. The legacy database layer still constructs SQL through string concatenation and must be migrated to prepared statements before production use. The modernized module does not ship with credentials.
 
