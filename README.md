@@ -14,7 +14,7 @@ It is preserved for reference and for a gradual migration. It currently uses the
 
 A new Java 21 / Spring Boot REST API is being introduced separately under [`modernized/`](modernized/README.md). It establishes the modern build, runtime configuration, health endpoints, API documentation, and an opt-in Oracle connection without changing the original desktop application.
 
-See [modernized/README.md](modernized/README.md) for the Java setup and [nodejs/README.md](nodejs/README.md) for the Node.js setup.
+See [modernized/README.md](modernized/README.md) for the Java setup and [nodejs/README.md](nodejs/README.md) for the Node.js API and dashboard setup.
 
 ### Node.js API
 
