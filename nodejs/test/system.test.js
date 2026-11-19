@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import request from 'supertest';
+import pino from 'pino';
 import { createApp } from '../src/app.js';
 
 const config = {
@@ -9,7 +10,7 @@ const config = {
   RATE_LIMIT_WINDOW_MS: 60_000,
   RATE_LIMIT_MAX: 120
 };
-const logger = { info() {}, error() {}, child() { return this; } };
+const logger = pino({ enabled: false });
 
 function createTestApp(database = {
   enabled: false,
