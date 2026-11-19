@@ -9,7 +9,7 @@ const config = {
   RATE_LIMIT_WINDOW_MS: 60_000,
   RATE_LIMIT_MAX: 120
 };
-const logger = { error() {} };
+const logger = { info() {}, error() {} };
 
 function createTestApp(database = {
   enabled: false,
