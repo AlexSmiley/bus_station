@@ -1,0 +1,32 @@
+{
+  "name": "bus-station-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node.js REST API for the Bus Station Management System",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "test:coverage": "node --experimental-test-coverage --test"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "oracledb": "^6.9.0",
+    "pino": "^9.9.0",
+    "pino-http": "^10.5.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.1.12",
+    "dotenv": "^16.6.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}

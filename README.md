@@ -14,7 +14,11 @@ It is preserved for reference and for a gradual migration. It currently uses the
 
 A new Java 21 / Spring Boot REST API is being introduced separately under [`modernized/`](modernized/README.md). It establishes the modern build, runtime configuration, health endpoints, API documentation, and an opt-in Oracle connection without changing the original desktop application.
 
-See [modernized/README.md](modernized/README.md) for setup and the migration roadmap.
+See [modernized/README.md](modernized/README.md) for the Java setup and [nodejs/README.md](nodejs/README.md) for the Node.js setup.
+
+### Node.js API
+
+A parallel Node.js / Express API implementation is available under [`nodejs/`](nodejs/README.md). It provides a separate runtime and port, Oracle pool integration, health endpoints, OpenAPI documentation, and automated tests. Both API tracks are retained for evaluation; neither replaces the Swing client.
 
 ## Security
 
