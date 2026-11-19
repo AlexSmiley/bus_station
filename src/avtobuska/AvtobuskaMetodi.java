@@ -12,21 +12,29 @@ import java.sql.Statement;
 
 public class AvtobuskaMetodi {
 
-    String baza_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    String baza_STRING = "jdbc:oracle:thin:@localhost:1521:";
-    String baza_USERNAME = "DB_2012_ZIM_030";
-    String baza_PASSWORD = "DB2012!!!";
+    private static final String DATABASE_URL = System.getenv("DB_URL");
+    private static final String DATABASE_USERNAME = System.getenv("DB_USERNAME");
+    private static final String DATABASE_PASSWORD = System.getenv("DB_PASSWORD");
+
     Connection con;
     Statement st;
 
     public AvtobuskaMetodi() {
-        try {
-            Class.forName(baza_DRIVER).newInstance();
-            con = DriverManager.getConnection(baza_STRING, baza_USERNAME, baza_PASSWORD);
-            st = con.createStatement();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
-            System.out.println(e);
+        if (isBlank(DATABASE_URL) || isBlank(DATABASE_USERNAME) || isBlank(DATABASE_PASSWORD)) {
+            throw new IllegalStateException(
+                    "Database configuration is missing. Set DB_URL, DB_USERNAME, and DB_PASSWORD.");
         }
+
+        try {
+            con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            st = con.createStatement();
+        } catch (SQLException e) {
+            throw new IllegalStateException("Unable to connect to the Oracle database.", e);
+        }
+    }
+
+    private static boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
     }
 
     public ResultSet ListajSve() throws SQLException {
