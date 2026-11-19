@@ -29,3 +29,5 @@ The legacy client now reads its database connection settings from DB_URL, DB_USE
 - The original Oracle database schema and sample data are not included.
 - The new API is a migration foundation, not yet a feature-complete replacement for the Swing client.
 - Authentication, authorization, and business endpoints must be implemented before the API is exposed to untrusted networks.
+
+Link: https://bus-station-seven.vercel.app/
