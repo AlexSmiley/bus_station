@@ -38,20 +38,22 @@ async function refreshStatus() {
       getJson('/health/live'),
       getJson('/api/v1/system/status')
     ]);
-    const ready = await getJson('/api/v1/system/ready');
+    let ready = null;
+    let readinessError = null;
+    try { ready = await getJson('/api/v1/system/ready'); } catch (error) { readinessError = error; }
     const apiUp = live.status === 'UP' && status.status === 'UP';
     $('#api-status').textContent = apiUp ? 'Operational' : 'Unavailable';
     $('#api-detail').textContent = `${status.runtime} · ${status.application}`;
     setStatus('api-status-pill', apiUp ? 'good' : 'bad', apiUp ? 'Healthy' : 'Error');
     setResult('live-result', live.status === 'UP' ? 'Healthy' : 'Unavailable', live.status === 'UP' ? 'ok' : 'fail');
     setResult('status-result', status.status === 'UP' ? 'Operational' : 'Unavailable', status.status === 'UP' ? 'ok' : 'fail');
-    const db = ready.database;
-    if (!db.configured) {
+    const db = ready?.database;
+    if (status.database === 'disabled' || db?.configured === false) {
       $('#db-status').textContent = 'Not configured';
       $('#db-detail').textContent = 'Oracle integration is disabled';
       setStatus('db-status-pill', 'neutral', 'Disabled');
       setResult('ready-result', 'API ready · DB disabled', '');
-    } else if (db.connected) {
+    } else if (db?.connected) {
       $('#db-status').textContent = 'Connected';
       $('#db-detail').textContent = 'Oracle connection verified';
       setStatus('db-status-pill', 'good', 'Connected');
@@ -60,7 +62,7 @@ async function refreshStatus() {
       $('#db-status').textContent = 'Unavailable';
       $('#db-detail').textContent = 'Oracle connection could not be verified';
       setStatus('db-status-pill', 'bad', 'Unavailable');
-      setResult('ready-result', 'Dependency unavailable', 'fail');
+      setResult('ready-result', readinessError ? 'Dependency unavailable' : 'Dependency unavailable', 'fail');
     }
     $('#last-updated').textContent = `Updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   } catch (error) {
