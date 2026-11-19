@@ -55,3 +55,17 @@ test('unknown routes return a consistent 404 response', async () => {
   assert.equal(response.status, 404);
   assert.equal(response.body.error.code, 'NOT_FOUND');
 });
+
+test('GET / serves the operations dashboard', async () => {
+  const response = await request(createTestApp()).get('/');
+  assert.equal(response.status, 200);
+  assert.match(response.headers['content-type'], /text\\/html/);
+  assert.match(response.text, /Bus Station/);
+});
+
+test('GET /app.js serves the dashboard client', async () => {
+  const response = await request(createTestApp()).get('/app.js');
+  assert.equal(response.status, 200);
+  assert.match(response.headers['content-type'], /javascript/);
+  assert.match(response.text, /refreshStatus/);
+});
