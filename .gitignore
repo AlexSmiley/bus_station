@@ -3,10 +3,27 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Java build output
+target/
+build/
+dist/
+
+# Local IDE metadata
+.idea/
+nbproject/private/
+*.iml
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+application-local.yml
+
+# Logs and runtime files
+*.log
 hs_err_pid*
